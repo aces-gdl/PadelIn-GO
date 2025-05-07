@@ -14,6 +14,7 @@ type Tournament struct {
 	EndDate          time.Time
 	StartTime        time.Time
 	EndTime          time.Time
+	InscriptionFee   float64
 	HostClubID       uint
 	GameDuration     int
 	RoundrobinCourts int

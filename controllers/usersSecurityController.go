@@ -35,7 +35,7 @@ func getInstitutionByURL(myURL string) uint {
 }
 func Signup(c *gin.Context) {
 	type bodyType struct {
-		models.User
+		models.EndUser
 		RequestURL string
 	}
 
@@ -48,7 +48,7 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	user := models.User{
+	user := models.EndUser{
 		Phone:         body.Phone,
 		Name:          body.Name,
 		InstitutionID: body.InstitutionID,
@@ -95,7 +95,7 @@ func Signup(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	type bodyType struct {
-		models.User
+		models.EndUser
 		RequestURL string
 	}
 
@@ -108,7 +108,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	var user models.User
+	var user models.EndUser
 	user.InstitutionID = getInstitutionByURL(body.RequestURL)
 	if user.InstitutionID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -208,7 +208,7 @@ func ChangePassword(c *gin.Context) {
 	}
 
 	// Fetch the user from the database
-	var user models.User
+	var user models.EndUser
 	result := initializers.DB.Table("user").First(&user, body.ID)
 	if result.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{

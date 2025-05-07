@@ -12,5 +12,5 @@ type TournamentCategory struct {
 	TextColor     string
 	Level         int
 	Active        bool
-	IdInstitution int
+	InstitutionID int
 }

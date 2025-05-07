@@ -27,7 +27,7 @@ func PostClub(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, gin.H{"status": "success", "results": 1, "data": club})
 }
 
 func GetClubs(c *gin.Context) {

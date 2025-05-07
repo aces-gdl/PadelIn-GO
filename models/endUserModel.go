@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type User struct {
+type EndUser struct {
 	gorm.Model
 	Name          string
 	Type          string

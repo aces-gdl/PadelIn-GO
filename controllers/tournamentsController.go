@@ -73,6 +73,9 @@ func PostTournaments(c *gin.Context) {
 		return
 	}
 
+	if body.StartDate.IsZero() {
+		body.StartDate = time.Now()
+	}
 	result := initializers.DB.Create(&body)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{

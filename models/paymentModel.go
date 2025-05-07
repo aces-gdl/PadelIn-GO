@@ -24,5 +24,7 @@ type Payment struct {
 	PaymentDate     *time.Time
 	RefundStatus    string `gorm:"type:varchar(20)"`
 	RefundDate      *time.Time
-	MetaData        string `gorm:"type:json"` // additional information about the payment
+	PaymentIntent   string `gorm:"type:varchar(255)"` // PaymentIntent for payment vendor
+	ClientSecret    string `gorm:"type:varchar(255)"` // client secret for payment vendor
+	MetaData        string `gorm:"type:json"`         // additional information about the payment
 }

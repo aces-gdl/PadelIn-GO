@@ -57,5 +57,33 @@ func NewRouter() *gin.Engine {
 	router.GET("/v1/catalogs/tournament", middleware.RequireAuth, controllers.GetTournament)
 	router.POST("/v1/catalogs/tournaments", middleware.RequireAuth, controllers.PostTournaments)
 
+	// Category
+	router.POST("/v1/catalogs/categories", middleware.RequireAuth, controllers.PostCategory)
+	router.GET("/v1/catalogs/categories", middleware.RequireAuth, controllers.GetCatgories)
+	router.PUT("/v1/catalogs/categories/:id", middleware.RequireAuth, controllers.PutCategory)
+	router.DELETE("/v1/catalogs/categories/:id", middleware.RequireAuth, controllers.DeleteCategory)
+
+	// Players By Tournament routes
+	router.POST("/v1/tournaments/register", middleware.RequireAuth, controllers.PostRegisterUserForTournament)
+	router.DELETE("/v1/tournaments/unregister", middleware.RequireAuth, controllers.DeleteRegisterUserForTournament)
+	router.GET("/v1/tournaments/players", middleware.RequireAuth, controllers.GetRegisteredUsersByTournament)
+	router.PUT("/v1/tournaments/players/:id", middleware.RequireAuth, controllers.UpdatePlayerByTournament)
+
+	// Teams
+	router.GET("/v1/tournament/isplayertaken", middleware.RequireAuth, controllers.GetIsPlayerTaken)
+	router.POST("/v1/tournament/enrolledteams", middleware.RequireAuth, controllers.PostEnrolledTeams)
+	router.PUT("/v1/tournament/playerbytournament/:id", controllers.UpdatePlayerByTournament)
+	router.GET("/v1/tournament/playerbytournament", middleware.RequireAuth, controllers.GetEnrolledTeams)
+	router.POST("/v1/tournament/createblankteam", middleware.RequireAuth, controllers.PostBlankTeam)
+	router.DELETE("/v1/tournament/deleteteam/:id", middleware.RequireAuth, controllers.DeleteEnrolledTeam)
+
+	// Stripe
+	router.GET("/v1/stripe/config", controllers.StripeConfig)
+	router.GET("/v1/stripe/get-payment-amount", controllers.GetPaymentAmount)
+	router.POST("/v1/stripe/create-payment-intent", controllers.CreatePaymentIntent)
+
+	// Player By Category
+	router.GET("/v1/catalogs/playersbycategory", middleware.RequireAuth, controllers.PlayersByCategory)
+
 	return router
 }

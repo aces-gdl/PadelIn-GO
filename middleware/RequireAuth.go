@@ -11,7 +11,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-var CurrentUser models.User
+var CurrentUser models.EndUser
 
 func RequireAuth(c *gin.Context) {
 	if os.Getenv("ENABLED_SECURITY") == "NO" {
@@ -41,7 +41,7 @@ func RequireAuth(c *gin.Context) {
 			return
 		}
 
-		var user models.User
+		var user models.EndUser
 		user.ID = uint(claims["sub"].(float64))
 		user.InstitutionID = uint(claims["inst"].(float64))
 		CurrentUser = user
