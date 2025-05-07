@@ -117,7 +117,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	results := initializers.DB.Debug().First(&user, "phone=? and type ='Player' and institution_id=?", body.Phone, user.InstitutionID)
+	results := initializers.DB.Table("end_users").Debug().First(&user, "phone=? and type ='Player' and institution_id=?", body.Phone, user.InstitutionID)
 	if results.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": "Telefono o clave invalido ...",
